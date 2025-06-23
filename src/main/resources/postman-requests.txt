@@ -115,4 +115,8 @@ localhost:8080/products/category/1
 
 Get request to get all categories
 localhost:8080/categories
+(Worked)
 
+Get request to get category by ID
+localhost:8080/categories/2
+(Worked)
