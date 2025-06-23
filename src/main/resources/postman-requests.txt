@@ -108,3 +108,11 @@ Get request to search products by category id
 Get request to search products by category id
 localhost:8080/products/category/1
 (Works)
+
+----------------------------------------------------------------------------------------
+
+-- Testing new requests for CategoriesController --
+
+Get request to get all categories
+localhost:8080/categories
+
