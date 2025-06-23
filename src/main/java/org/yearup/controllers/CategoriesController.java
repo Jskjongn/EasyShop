@@ -6,9 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.yearup.data.CategoryDao;
-import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
-import org.yearup.models.Product;
 
 import java.util.List;
 
@@ -28,6 +26,7 @@ public class CategoriesController
     }
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public List<Category> getAll()
     {
         // find and return all categories
@@ -35,6 +34,7 @@ public class CategoriesController
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id)
     {
         // get the category by id
@@ -62,7 +62,7 @@ public class CategoriesController
 //    }
 
     @PostMapping
-    // add annotation to ensure that only an ADMIN can call this function
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Category addCategory(@RequestBody Category category)
     {
         // insert the category
@@ -70,7 +70,7 @@ public class CategoriesController
     }
 
     @PutMapping("/{id}")
-    // add annotation to ensure that only an ADMIN can call this function
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateCategory(@PathVariable int id, @RequestBody Category category)
     {
         // update the category by id
@@ -79,9 +79,10 @@ public class CategoriesController
 
 
     @DeleteMapping("/{id}")
-    // add annotation to ensure that only an ADMIN can call this function
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteCategory(@PathVariable int id)
     {
+        // delete category by id
         categoryDao.delete(id);
     }
 }
