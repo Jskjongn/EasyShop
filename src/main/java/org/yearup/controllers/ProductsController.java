@@ -81,7 +81,8 @@ public class ProductsController
     {
         try
         {
-            productDao.create(product);
+            // bug fix 3: uses update method instead of create method and has id passed to it
+            productDao.update(id, product);
         }
         catch(Exception ex)
         {

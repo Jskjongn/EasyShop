@@ -35,3 +35,63 @@ localhost:8080/products?minPrice=100&maxPrice=200
 (Works)
 
 ----------------------------------------------------------------------------------------
+
+-- Before bug fixes (ProductsController) --
+
+Post request to add new product
+localhost:8080/products
+Body:
+{
+    "name": "Xbox X",
+    "price": 599.99,
+    "categoryId": 1,
+    "description": "All in one gaming console",
+    "color": "Black",
+    "stock": 50,
+    "imageUrl": "xbox-x.jpg",
+    "featured": false
+}
+(Works)
+
+Put request to update product
+localhost:8080/products/91
+Body:
+{
+    "name": "Xbox X",
+    "price": 499.99,
+    "categoryId": 1,
+    "description": "All in one gaming console",
+    "color": "Black",
+    "stock": 50,
+    "imageUrl": "xbox-x.jpg",
+    "featured": false
+}
+(Doesn't work, adds new product instead of updating)
+{
+    "productId": 92,
+    "name": "Xbox X",
+    "price": 499.99,
+    "categoryId": 1,
+    "description": "All in one gaming console",
+    "color": "Black",
+    "stock": 50,
+    "imageUrl": "xbox-x.jpg",
+    "featured": false
+}
+
+-- After bug fixes (ProductsController) --
+
+Put request to update product
+localhost:8080/products/91
+Body:
+{
+    "name": "Xbox X",
+    "price": 499.99,
+    "categoryId": 1,
+    "description": "All in one gaming console",
+    "color": "Black",
+    "stock": 50,
+    "imageUrl": "xbox-x.jpg",
+    "featured": false
+}
+(Works as intended)
