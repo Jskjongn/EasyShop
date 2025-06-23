@@ -31,7 +31,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
                         SELECT
                             *
                         FROM
-                            categories
+                            categories;
                         """);
                 // executes and stores results
                 ResultSet resultSet = preparedStatement.executeQuery()
@@ -61,7 +61,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
                         FROM
                             categories
                         WHERE
-                            category_id = ?
+                            category_id = ?;
                         """);
         ) {
             preparedStatement.setInt(1, categoryId);
@@ -78,13 +78,42 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return null;
     }
 
     @Override
     public Category create(Category category) {
         // create a new category
+        try (
+                Connection connection = getConnection();
+
+                PreparedStatement preparedStatement = connection.prepareStatement("""
+                        INSERT INTO categories (name, description)
+                        VALUES
+                        (?, ?);
+                        """, PreparedStatement.RETURN_GENERATED_KEYS);
+        ) {
+            preparedStatement.setString(1, category.getName());
+            preparedStatement.setString(2, category.getDescription());
+
+            int rows = preparedStatement.executeUpdate();
+
+            if (rows > 0) {
+                // retrieve the generated keys
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+
+                    if (generatedKeys.next()) {
+                        // retrieve the auto-incremented ID
+                        int categoryId = generatedKeys.getInt(1);
+
+                        // get the newly inserted category
+                        return getById(categoryId);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 

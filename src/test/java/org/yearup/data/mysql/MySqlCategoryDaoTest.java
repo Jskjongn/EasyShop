@@ -51,4 +51,22 @@ public class MySqlCategoryDaoTest extends BaseDaoTestClass {
         assertEquals(1, id.getCategoryId());
     }
 
+    @Test
+    public void create_shouldReturn_theNewCategory()
+    {
+        // arrange
+        Category newCategory = new Category()
+        {{
+            setName("Toys & Games");
+            setDescription("Have all the fun you need with our inventory full of toys and games to take away the boredom");
+        }};
+
+        // act
+        Category actual = categoryDao.create(newCategory);
+
+        // assert
+        assertEquals(4, actual.getCategoryId());
+        assertEquals("Toys & Games", actual.getName());
+        assertEquals("Have all the fun you need with our inventory full of toys and games to take away the boredom", actual.getDescription());
+    }
 }
