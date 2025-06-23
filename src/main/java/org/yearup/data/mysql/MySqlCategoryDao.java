@@ -86,18 +86,21 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         // create a new category
         try (
                 Connection connection = getConnection();
-
+                // creates new row and inserts values into columns
                 PreparedStatement preparedStatement = connection.prepareStatement("""
                         INSERT INTO categories (name, description)
                         VALUES
                         (?, ?);
                         """, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
+            // sets parameters
             preparedStatement.setString(1, category.getName());
             preparedStatement.setString(2, category.getDescription());
 
+            // executes and stores rows updated
             int rows = preparedStatement.executeUpdate();
 
+            // if rows updated is greater than 0
             if (rows > 0) {
                 // retrieve the generated keys
                 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -106,7 +109,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
                         // retrieve the auto-incremented ID
                         int categoryId = generatedKeys.getInt(1);
 
-                        // get the newly inserted category
+                        // returns the newly inserted category
                         return getById(categoryId);
                     }
                 }
@@ -120,6 +123,28 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
     @Override
     public void update(int categoryId, Category category) {
         // update category
+        try (
+                Connection connection = getConnection();
+
+                PreparedStatement preparedStatement = connection.prepareStatement("""
+                        UPDATE
+                            categories
+                        SET
+                            name = ?
+                            , description = ?
+                        WHERE
+                            category_id = ?;
+                        """);
+        ) {
+            preparedStatement.setString(1, category.getName());
+            preparedStatement.setString(2, category.getDescription());
+            preparedStatement.setInt(3, categoryId);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

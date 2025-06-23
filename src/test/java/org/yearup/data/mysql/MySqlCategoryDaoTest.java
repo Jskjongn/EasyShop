@@ -69,4 +69,33 @@ public class MySqlCategoryDaoTest extends BaseDaoTestClass {
         assertEquals("Toys & Games", actual.getName());
         assertEquals("Have all the fun you need with our inventory full of toys and games to take away the boredom", actual.getDescription());
     }
+
+    @Test
+    public void update_shouldReturn_updatedDescription()
+    {
+        // arrange
+        Category newCategory = new Category()
+        {{
+            setName("Toys & Games");
+            setDescription("Have all the fun you need with our inventory full of toys and games to take away the boredom");
+        }};
+
+        Category actual = categoryDao.create(newCategory);
+        int id = actual.getCategoryId();
+
+        // act
+        Category updateCategory = new Category()
+        {{
+            setName("Toys & Games");
+            setDescription("Take away all the boredom with our inventory full of toys and games");
+        }};
+
+        categoryDao.update(id, updateCategory);
+        Category updated = categoryDao.getById(id);
+
+        // assert
+        assertEquals(4, updated.getCategoryId());
+        assertEquals("Toys & Games", updated.getName());
+        assertEquals("Take away all the boredom with our inventory full of toys and games", updated.getDescription());
+    }
 }
