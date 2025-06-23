@@ -95,3 +95,16 @@ Body:
     "featured": false
 }
 (Works as intended)
+
+----------------------------------------------------------------------------------------
+
+-- Before bug fixes (ProductsController) --
+
+Get request to search products by category id
+(Missing method so can't make request)
+
+-- After bug fixes (ProductsController) --
+
+Get request to search products by category id
+localhost:8080/products/category/1
+(Works)
