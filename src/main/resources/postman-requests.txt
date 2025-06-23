@@ -140,3 +140,7 @@ Body:
     "description": "Have all the fun you need with our inventory full of toys and games to take away the boredom."
 }
 (Worked)
+
+Delete request to delete a method
+localhost:8080/categories/4
+(Worked)
