@@ -1,0 +1,37 @@
+-- Before bug fixes (MySqlProductDao) --
+
+Gets all products with category 1
+localhost:8080/products?cat=1
+(Works)
+
+Gets all products with category 1 and color is black
+localhost:8080/products?cat=1&color=black
+(Works)
+
+Gets all products with a min price of 200
+localhost:8080/products?minPrice=200
+(Doesn't work)
+
+Gets all products with a max price of 25
+localhost:8080/products?maxPrice=25
+(Doesn't work)
+
+Gets all products with min price of 100 and max price of 200
+localhost:8080/products?minPrice=100&maxPrice=200
+(Doesn't work)
+
+-- After bug fixes (MySqlProductDao) --
+
+Gets all products with a min price of 200
+localhost:8080/products?minPrice=200
+(Works)
+
+Gets all products with a max price of 25
+localhost:8080/products?maxPrice=25
+(Works)
+
+Gets all products with min price of 100 and max price of 200
+localhost:8080/products?minPrice=100&maxPrice=200
+(Works)
+
+----------------------------------------------------------------------------------------
