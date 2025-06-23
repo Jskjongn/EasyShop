@@ -120,3 +120,13 @@ localhost:8080/categories
 Get request to get category by ID
 localhost:8080/categories/2
 (Worked)
+
+Post request to add a new category
+localhost:8080/categories
+Body:
+{
+    "categoryId": 4,
+    "name": "Toys & Games",
+    "description": "Take away all the boredom with our inventory full of toys and games."
+}
+(Worked)
