@@ -98,4 +98,25 @@ public class MySqlCategoryDaoTest extends BaseDaoTestClass {
         assertEquals("Toys & Games", updated.getName());
         assertEquals("Take away all the boredom with our inventory full of toys and games", updated.getDescription());
     }
+
+    @Test
+    public void delete_shouldNotReturn_deletedCategory() {
+        // arrange
+        Category newCategory = new Category()
+        {{
+            setName("Toys & Games");
+            setDescription("Have all the fun you need with our inventory full of toys and games to take away the boredom");
+        }};
+
+        Category actual = categoryDao.create(newCategory);
+        int id = actual.getCategoryId();
+
+        // act
+        categoryDao.delete(id);
+
+        Category deleted = categoryDao.getById(id);
+
+        // assert
+        assertNull(deleted);
+    }
 }
