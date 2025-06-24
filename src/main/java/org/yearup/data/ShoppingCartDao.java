@@ -8,6 +8,6 @@ public interface ShoppingCartDao
     ShoppingCart getByUserId(int userId);
     // add additional method signatures here
     ShoppingCartItem addToCart(int userId, int productId);
-    void update(int userId, ShoppingCartItem shoppingCartItem);
+    void update(int userId, int productId, ShoppingCartItem shoppingCartItem);
     void delete(int userId);
 }

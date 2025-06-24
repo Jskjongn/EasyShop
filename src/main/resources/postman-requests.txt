@@ -157,3 +157,11 @@ localhost:8080/cart
 Post request to add a product to the shopping cart
 localhost:8080/cart/91
 (Worked, showed up in Postman and on web app in view cart)
+
+Put request to update quantity of product in the shopping cart
+localhost:8080/cart/products/91
+Body:
+{
+"quantity": 2
+}
+(Worked and updated quantity to 2)

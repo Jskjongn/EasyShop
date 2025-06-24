@@ -114,7 +114,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
 
     // updates the quantity of an item in a shopping cart
     @Override
-    public void update(int userId, ShoppingCartItem shoppingCartItem) {
+    public void update(int userId, int productId, ShoppingCartItem shoppingCartItem) {
 
         try (
                 Connection connection = getConnection();
@@ -130,7 +130,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         ) {
             preparedStatement.setInt(1, shoppingCartItem.getQuantity());
             preparedStatement.setInt(2, userId);
-            preparedStatement.setInt(3, shoppingCartItem.getProductId());
+            preparedStatement.setInt(3, productId);
 
             preparedStatement.executeUpdate();
 
