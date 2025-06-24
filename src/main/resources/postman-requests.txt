@@ -144,3 +144,12 @@ Body:
 Delete request to delete a method
 localhost:8080/categories/4
 (Worked)
+
+----------------------------------------------------------------------------------------
+
+-- Testing new requests for ShoppingCartController --
+
+Get request to view all items in a shopping cart depended on who is logged in
+(Login in as user George)
+localhost:8080/cart
+(Worked)
