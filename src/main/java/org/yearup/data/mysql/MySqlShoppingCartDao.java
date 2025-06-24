@@ -87,10 +87,12 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
 
         try (
                 Connection connection = getConnection();
-
+                // inserts new row if product doesn't exist but if there's a duplicate then it updates the quantity instead
                 PreparedStatement preparedStatement = connection.prepareStatement("""
                         INSERT INTO shopping_cart (user_id, product_id, quantity)
-                        VALUES (?, ?, ?);
+                        VALUES (?, ?, ?)
+                        ON DUPLICATE KEY
+                        UPDATE quantity = quantity + 1;
                         """);
         ) {
             // sets user input and adds default quantity of 1 to quantity and creates new row
