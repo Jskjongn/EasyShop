@@ -47,4 +47,21 @@ public class MySqlShoppingCartDaoTest extends BaseDaoTestClass {
         assertEquals(1, shoppingCartItem.getProductId());
         assertEquals(1, shoppingCartItem.getQuantity());
     }
+
+    @Test
+    public void update_shouldUpdate_itemQuantityInShoppingCart()
+    {
+        // arrange
+        int userId = 1;
+        int productId = 1;
+
+        ShoppingCartItem shoppingCartItem = shoppingCartDao.addToCart(userId, productId);
+        shoppingCartItem.setQuantity(2);
+
+        // act
+        shoppingCartDao.update(userId, shoppingCartItem);
+        
+        // assert
+        assertEquals(2, shoppingCartItem.getQuantity());
+    }
 }
