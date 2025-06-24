@@ -165,3 +165,7 @@ Body:
 "quantity": 2
 }
 (Worked and updated quantity to 2)
+
+Delete request to clear shopping cart of user
+localhost:8080/cart
+(Worked)
