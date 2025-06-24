@@ -54,7 +54,7 @@ public class ShoppingCartController
     }
 
     // add a product to the cart
-    @PostMapping("/{id}")
+    @PostMapping("/products/{id}")
     public ShoppingCartItem addProductToCart(@PathVariable int id, Principal principal) {
         try
         {
