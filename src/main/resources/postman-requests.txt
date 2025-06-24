@@ -153,3 +153,7 @@ Get request to view all items in a shopping cart depended on who is logged in
 (Login in as user George)
 localhost:8080/cart
 (Worked)
+
+Post request to add a product to the shopping cart
+localhost:8080/cart/91
+(Worked, showed up in Postman and on web app in view cart)
