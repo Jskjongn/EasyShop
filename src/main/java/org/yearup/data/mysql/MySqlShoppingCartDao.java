@@ -112,6 +112,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return shoppingCartItem;
     }
 
+    // updates the quantity of an item in a shopping cart
     @Override
     public void update(int userId, ShoppingCartItem shoppingCartItem) {
 
@@ -138,8 +139,25 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         }
     }
 
+    // clears cart of a certain user id
     @Override
     public void delete(int userId) {
 
+        try (
+                Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("""
+                        DELETE FROM
+                            shopping_cart
+                        WHERE
+                            user_id = ?;
+                        """)
+        ) {
+            preparedStatement.setInt(1, userId);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

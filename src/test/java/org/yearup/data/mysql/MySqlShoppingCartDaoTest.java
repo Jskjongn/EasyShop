@@ -60,8 +60,25 @@ public class MySqlShoppingCartDaoTest extends BaseDaoTestClass {
 
         // act
         shoppingCartDao.update(userId, shoppingCartItem);
-        
+
         // assert
         assertEquals(2, shoppingCartItem.getQuantity());
+    }
+
+    @Test
+    public void delete_shouldClear_shoppingCart()
+    {
+        // arrange
+        int userId = 1;
+        int productId = 1;
+
+        shoppingCartDao.addToCart(userId, productId);
+
+        // act
+        shoppingCartDao.delete(userId);
+        ShoppingCart shoppingCart = shoppingCartDao.getByUserId(userId);
+
+        // assert
+        assertTrue(shoppingCart.getItems().isEmpty());
     }
 }
