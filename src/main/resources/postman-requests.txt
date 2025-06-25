@@ -169,3 +169,16 @@ Body:
 Delete request to clear shopping cart of user
 localhost:8080/cart
 (Worked)
+
+------------------------------------------------------------------------------------------
+
+-- Testing new requests for ProfilesController --
+
+Get request to view a profile
+(Logged in as user George)
+localhost:8080/profile
+(Worked)
+
+Put request to update profile's details
+localhost:8080/profile
+(Worked)
