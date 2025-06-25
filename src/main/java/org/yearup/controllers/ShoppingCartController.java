@@ -55,7 +55,7 @@ public class ShoppingCartController
 
     // add a product to the cart
     @PostMapping("/products/{id}")
-    public ShoppingCartItem addProductToCart(@PathVariable int id, Principal principal) {
+    public ShoppingCart addProductToCart(@PathVariable int id, Principal principal) {
         try
         {
             // get the currently logged-in username
@@ -65,7 +65,10 @@ public class ShoppingCartController
             int userId = user.getId();
 
             // get all items in the cart and return the cart
-            return shoppingCartDao.addToCart(userId, id);
+            shoppingCartDao.addToCart(userId, id);
+
+            // returns updated shopping cart
+            return shoppingCartDao.getByUserId(userId);
         }
         catch(Exception e)
         {
@@ -76,7 +79,7 @@ public class ShoppingCartController
 
     // update an existing product's quantity in the cart
     @PutMapping("/products/{id}")
-    public void updateQuantity(@PathVariable int id, @RequestBody ShoppingCartItem shoppingCartItem, Principal principal) {
+    public ShoppingCart updateQuantity(@PathVariable int id, @RequestBody ShoppingCartItem shoppingCartItem, Principal principal) {
         try
         {
             // get the currently logged-in username
@@ -87,6 +90,9 @@ public class ShoppingCartController
 
             // get all items in the cart and return the cart
             shoppingCartDao.update(userId, id, shoppingCartItem);
+
+            // returns updated shopping car
+            return shoppingCartDao.getByUserId(userId);
         }
         catch(Exception e)
         {
@@ -96,7 +102,7 @@ public class ShoppingCartController
 
     // clear all products from the current users cart
     @DeleteMapping
-    public void clearCart(Principal principal) {
+    public ShoppingCart clearCart(Principal principal) {
         try
         {
             // get the currently logged-in username
@@ -107,6 +113,9 @@ public class ShoppingCartController
 
             // get all items in the cart and return the cart
             shoppingCartDao.delete(userId);
+
+            // returns updated shopping cart
+            return shoppingCartDao.getByUserId(userId);
         }
         catch(Exception e)
         {
