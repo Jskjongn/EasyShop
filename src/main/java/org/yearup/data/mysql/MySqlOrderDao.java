@@ -3,7 +3,6 @@ package org.yearup.data.mysql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.yearup.data.OrderDao;
-import org.yearup.data.ProductDao;
 import org.yearup.data.ProfileDao;
 import org.yearup.data.ShoppingCartDao;
 import org.yearup.models.*;
@@ -18,14 +17,12 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
 
     private ShoppingCartDao shoppingCartDao;
     private ProfileDao profileDao;
-    private ProductDao productDao;
 
     @Autowired
-    public MySqlOrderDao(DataSource dataSource, ShoppingCartDao shoppingCartDao, ProfileDao profileDao, ProductDao productDao) {
+    public MySqlOrderDao(DataSource dataSource, ShoppingCartDao shoppingCartDao, ProfileDao profileDao) {
         super(dataSource);
         this.shoppingCartDao = shoppingCartDao;
         this.profileDao = profileDao;
-        this.productDao = productDao;
     }
 
     @Override
